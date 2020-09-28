@@ -1,5 +1,5 @@
 ﻿using Core.Entities;
-using Core.Entities.Interfaces;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -31,6 +31,22 @@ namespace API.Controllers
             var product = await _repo.GetProductByIdAsync(productId);
 
             return Ok(product);
+        }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetAllBrands()
+        {
+            var brands = await _repo.GetAllProductBrandsAsync();
+
+            return Ok(brands);
+        }
+        
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetAllProductTypes()
+        {
+            var types = await _repo.GetAllProductTypesAsync();
+
+            return Ok(types);
         }
     }
 }

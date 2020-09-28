@@ -21,14 +21,12 @@ namespace Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             var typesString = File.ReadAllText("../Infrastructure/Data/SeedingData/types.json");
             var brandsString = File.ReadAllText("../Infrastructure/Data/SeedingData/brands.json");
             var brands = JsonConvert.DeserializeObject<List<ProductBrand>>(brandsString);
             var types = JsonConvert.DeserializeObject<List<ProductType>>(typesString);
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-
 
             modelBuilder.Entity<ProductBrand>().HasData(brands);
             modelBuilder.Entity<ProductType>().HasData(types);
