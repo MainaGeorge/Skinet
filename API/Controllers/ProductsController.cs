@@ -1,4 +1,6 @@
-﻿using Core.Entities;
+﻿using API.Dtos;
+using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
@@ -14,24 +16,30 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<Product> _productRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
+        private readonly IMapper _mapper;
 
         public ProductsController(IGenericRepository<ProductBrand> productBrandRepo,
-            IGenericRepository<Product> productRepo, IGenericRepository<ProductType> productTypeRepo)
+            IGenericRepository<Product> productRepo,
+            IGenericRepository<ProductType> productTypeRepo,
+            IMapper mapper)
         {
             _productBrandRepo = productBrandRepo;
             _productRepo = productRepo;
             _productTypeRepo = productTypeRepo;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
         {
             var productSpecifications = new ProductWithTypeAndBrandSpecifications();
 
 
             var products = await _productRepo.GetAllWithSpecifications(productSpecifications);
 
-            return Ok(products);
+            var productsToReturn = _mapper.Map<IReadOnlyCollection<ProductToReturnDto>>(products);
+
+            return Ok(productsToReturn);
         }
 
         [HttpGet("{productId}")]
@@ -40,7 +48,9 @@ namespace API.Controllers
             var productSpecification = new ProductWithTypeAndBrandSpecifications(productId);
             var product = await _productRepo.GetByIdWithSpecifications(productSpecification);
 
-            return Ok(product);
+            var productToReturn = _mapper.Map<ProductToReturnDto>(product);
+
+            return Ok(productToReturn);
         }
 
         [HttpGet("brands")]
