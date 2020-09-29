@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -25,7 +26,10 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            var products = await _productRepo.GetAllAsync();
+            var productSpecifications = new ProductWithTypeAndBrandSpecifications();
+
+
+            var products = await _productRepo.GetAllWithSpecifications(productSpecifications);
 
             return Ok(products);
         }
@@ -33,7 +37,8 @@ namespace API.Controllers
         [HttpGet("{productId}")]
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
-            var product = await _productRepo.GetByIdAsync(productId);
+            var productSpecification = new ProductWithTypeAndBrandSpecifications(productId);
+            var product = await _productRepo.GetByIdWithSpecifications(productSpecification);
 
             return Ok(product);
         }
