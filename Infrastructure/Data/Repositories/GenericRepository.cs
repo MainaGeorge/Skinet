@@ -36,6 +36,11 @@ namespace Infrastructure.Data.Repositories
             return await ApplySpecification(specifications).ToListAsync();
         }
 
+        public async Task<int> CountNumberOfProducts(ISpecifications<T> specifications)
+        {
+            return await ApplySpecification(specifications).CountAsync();
+        }
+
         private IQueryable<T> ApplySpecification(ISpecifications<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);

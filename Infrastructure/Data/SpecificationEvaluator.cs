@@ -27,6 +27,11 @@ namespace Infrastructure.Data
                 finalQuery = finalQuery.OrderBy(spec.OrderByExpression);
             }
 
+            if (spec.IsPaginationActivated)
+            {
+                finalQuery = finalQuery.Skip(spec.Skip).Take(spec.Take);
+            }
+
             finalQuery = spec.Includes
                 .Aggregate(finalQuery,
                     (currentQuery, currentIncludeExpression) => currentQuery.Include(currentIncludeExpression));

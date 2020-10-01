@@ -1,25 +1,27 @@
-﻿using System.Runtime.InteropServices;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace Core.Specifications
 {
     public class ProductWithTypeAndBrandSpecifications : BaseSpecification<Product>
     {
-        public ProductWithTypeAndBrandSpecifications(string sort, int? typeId, int? brandId)
+        public ProductWithTypeAndBrandSpecifications(ProductQueryParameters parameters)
         : base(
-            x => (!typeId.HasValue || x.ProductTypeId == typeId.Value) && 
-                 (!brandId.HasValue || x.ProductBrandId == brandId.Value))
+            x => (!parameters.TypeId.HasValue || x.ProductTypeId == parameters.TypeId.Value) &&
+                 (!parameters.BrandId.HasValue || x.ProductBrandId == parameters.BrandId.Value))
         {
             AddInclude(x => x.ProductBrand);
             AddInclude(x => x.ProductType);
+            var itemsToSkip = parameters.PageSize * (parameters.PageIndex - 1);
 
-            if (string.IsNullOrWhiteSpace(sort))
+            AddPagination(parameters.PageSize, itemsToSkip);
+
+            if (string.IsNullOrWhiteSpace(parameters.Sort))
             {
                 AddOrderByExpression(p => p.Name);
             }
             else
             {
-                switch (sort)
+                switch (parameters.Sort)
                 {
                     case "priceAsc":
                         AddOrderByExpression(p => p.Price);

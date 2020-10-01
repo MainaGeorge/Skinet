@@ -13,6 +13,11 @@ namespace Core.Specifications
         Expression<Func<T, object>> OrderByExpression { get;  }
 
         Expression<Func<T, object>> OrderByDescendingExpression { get;  }
+        int Skip { get; }
+
+        int Take { get;  }
+
+        bool IsPaginationActivated { get;  }
 
     }
 }
