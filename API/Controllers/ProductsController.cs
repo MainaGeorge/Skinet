@@ -43,13 +43,10 @@ namespace API.Controllers
 
             var productsToReturn = _mapper.Map<IReadOnlyCollection<ProductToReturnDto>>(products);
 
-            return Ok(new Pagination<ProductToReturnDto>
-            {
-                Data = productsToReturn,
-                Count = totalItems,
-                PageSize = parameters.PageSize,
-                PageIndex = parameters.PageIndex
-            });
+            return Ok(new Pagination<ProductToReturnDto>(parameters.PageIndex,
+                totalItems, parameters.PageSize, productsToReturn));
+
+
         }
 
         [HttpGet("{productId}")]
