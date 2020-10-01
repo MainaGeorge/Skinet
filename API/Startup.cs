@@ -23,12 +23,10 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddApplicationSpecificServices();
             services.AddDbContext<StoreContext>(opt =>
                 opt.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-
-
             services.AddAutoMapper(typeof(ProductMappings));
+            services.AddApplicationSpecificServices();
             services.AddSwaggerDocumentation();
 
 

@@ -10,5 +10,9 @@ namespace Core.Specifications
 
         List<Expression<Func<T, object>>> Includes { get;  }
 
+        Expression<Func<T, object>> OrderByExpression { get;  }
+
+        Expression<Func<T, object>> OrderByDescendingExpression { get;  }
+
     }
 }

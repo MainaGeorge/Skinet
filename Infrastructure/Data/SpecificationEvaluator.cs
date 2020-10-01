@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Infrastructure.Data
 {
@@ -15,6 +15,16 @@ namespace Infrastructure.Data
             if (spec.Criteria != null)
             {
                 finalQuery = finalQuery.Where(spec.Criteria);
+            }
+
+            if (spec.OrderByDescendingExpression != null)
+            {
+                finalQuery = finalQuery.OrderByDescending(spec.OrderByDescendingExpression);
+            }
+
+            if (spec.OrderByExpression != null)
+            {
+                finalQuery = finalQuery.OrderBy(spec.OrderByExpression);
             }
 
             finalQuery = spec.Includes

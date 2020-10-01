@@ -30,10 +30,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string sort, int? typeId, int? brandId)
         {
 
-            var productSpecifications = new ProductWithTypeAndBrandSpecifications();
+            var productSpecifications = new ProductWithTypeAndBrandSpecifications(sort, typeId, brandId);
 
 
             var products = await _productRepo.GetAllWithSpecifications(productSpecifications);
@@ -44,7 +44,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{productId}")]
-        [ProducesResponseType(typeof(ProductToReturnDto),StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProductToReturnDto), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
