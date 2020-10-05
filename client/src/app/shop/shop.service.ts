@@ -7,12 +7,13 @@ import {IProductBrand} from '../shared/models/productBrand';
 import {map} from 'rxjs/operators';
 import {ProductQueryParameters} from '../shared/models/productQueryParameters';
 import {IProduct} from '../shared/models/product';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-  baseUrl = 'https://localhost:44334/api/'
+  baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
   getProducts(queryParams: ProductQueryParameters):Observable<IPagination>{
