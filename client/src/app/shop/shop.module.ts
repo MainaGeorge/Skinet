@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ProductItemComponent } from './product-item/product-item.component';
 import {SharedModule} from '../shared/shared.module';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
   imports: [
     CommonModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [ShopComponent]
 })

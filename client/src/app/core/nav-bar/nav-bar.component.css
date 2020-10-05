@@ -13,8 +13,9 @@
 
 a {
   text-decoration: none;
-  color: #343a40;}
-a:active {
+  color: #343a40;
+}
+a.active {
    color: orange;
  }
 
@@ -26,3 +27,4 @@ a:active {
 .logo:focus {
    outline: none;
  }
+
