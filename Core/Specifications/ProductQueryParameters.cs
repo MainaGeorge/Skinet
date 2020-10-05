@@ -8,7 +8,7 @@
 
         private const int MaxPageValue = 50;
 
-        private int _pageSize = 3;
+        private int _pageSize = 6;
 
         public int PageIndex { get; set; } = 1;
 
@@ -23,7 +23,7 @@
         public string Search
         {
             get => _search;
-            set => _search = value.ToLower(); 
+            set => _search = value.ToLower();
         }
 
 
