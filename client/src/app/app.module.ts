@@ -7,6 +7,7 @@ import {CoreModule} from './core/core.module';
 import {ShopModule} from './shop/shop.module';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeModule} from './home/home.module';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -18,8 +19,8 @@ import {HomeModule} from './home/home.module';
     BrowserAnimationsModule,
     CoreModule,
     AppRoutingModule,
-    ShopModule,
-    HomeModule
+    HomeModule,
+    HttpClientModule
   ],
   exports: [],
   providers: [],

@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ProductItemComponent } from './product-item/product-item.component';
 import {SharedModule} from '../shared/shared.module';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import {RouterModule} from '@angular/router';
+import {ShopRoutingModule} from './shop-routing.module';
 
 
 
@@ -13,10 +13,8 @@ import {RouterModule} from '@angular/router';
   declarations: [ShopComponent, ProductItemComponent, ProductDetailComponent],
   imports: [
     CommonModule,
-    HttpClientModule,
     SharedModule,
-    RouterModule
-  ],
-  exports: [ShopComponent]
+    ShopRoutingModule
+  ]
 })
 export class ShopModule { }
