@@ -3,7 +3,6 @@ import {ShopService} from './shop.service';
 import {IProduct} from '../shared/models/product';
 import {IProductBrand} from '../shared/models/productBrand';
 import {IProductType} from '../shared/models/productType';
-import {PageChangedEvent} from 'ngx-bootstrap/pagination';
 import {ProductQueryParameters} from '../shared/models/productQueryParameters';
 
 @Component({
