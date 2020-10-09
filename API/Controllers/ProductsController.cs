@@ -50,8 +50,8 @@ namespace API.Controllers
         }
 
         [HttpGet("{productId}")]
-        [ProducesResponseType(typeof(ProductToReturnDto), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProductToReturnDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
             var productSpecification = new ProductWithTypeAndBrandSpecifications(productId);
