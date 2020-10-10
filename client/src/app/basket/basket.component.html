@@ -1,9 +1,9 @@
 <div class="container">
   <div *ngIf="(basket$ | async) === null ">
-    <p class="text-danger">NO items in the cart</p>
+    <p class="text-danger">No items in the cart</p>
   </div>
   <div *ngIf="basket$ | async as basketStuff">
-    <div class="pb-5">
+    <div class="pb-3">
       <div class="container">
         <div class="row">
           <div class="col-12 py-5 mb-1">
@@ -45,14 +45,14 @@
                     <td class="align-middle"><strong>{{item.price | currency }}</strong></td>
                     <td class="align-middle">
                       <div class="d-flex align-items-center">
-                        <i class="fa fa-minus-circle text-warning mr-2" style="cursor: pointer; font-size: 2em"></i>
+                        <i  (click)="onDecrementingItemQuantity(item)" class="fa fa-minus-circle text-warning mr-2" style="cursor: pointer; font-size: 2em"></i>
                         <span class="font-weight-bold" style="font-size: 1.5em">{{ item. quantity }}</span>
-                        <i class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em"></i>
+                        <i (click)="onIncrementingItemQuantity(item)" class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em"></i>
                       </div>
                     </td>
                     <td class="align-middle"><strong>{{ item.price * item.quantity | currency}}</strong></td>
                     <td class="align-middle text-center">
-                      <a href="" class="text-danger">
+                      <a (click)="onRemovingItemFromBasket(item)" style="cursor: pointer" class="text-danger">
                         <i class="fa fa-trash" style="font-size: 2em;"></i>
                       </a>
                     </td>
@@ -61,6 +61,10 @@
               </table>
             </div>
           </div>
+        </div>
+        <div class="row offset-6 col-6">
+          <app-order-totals></app-order-totals>
+          <a routerLink="/checkout" class="btn btn-outline-primary btn-block py-2">Proceed to checkout</a>
         </div>
       </div>
     </div>
